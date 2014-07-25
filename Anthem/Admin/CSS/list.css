@@ -1,0 +1,11 @@
+/* CSS for ListAdminPage */
+
+#filters-container { padding-bottom: 0; }
+#filters dl { margin: 5px 0 5px 0; }
+#filters dt { margin-top: 3px; }
+#filters dd input, #filters dd textarea, #filters dd select { margin: 0; }
+#filters dd .checkbox { margin-top: 5px; }
+#filters dd { margin-bottom: 5px; }
+#filters dd input, #filters dd select, #filters dd .add-on { margin-top: -2px; }
+#filters dd .inline div { margin-left: 5px; margin-top: -5px; float: left; display: inline-block; }
+#filters-apply, #filters-reset { margin: 0; }

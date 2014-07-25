@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="default" namespace="Anthem\Settings\Model" package="Anthem.Settings.Model" defaultIdMethod="native">
+  <table name="settings" phpName="Setting" package="Anthem.Settings.Model">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="key" type="varchar" size="80" required="true" primaryString="true" />
+    <column name="value" type="longvarchar" required="true" />
+    <column name="user_id" type="integer" />
+    <foreign-key foreignTable="users" phpName="User" refPhpName="Setting" onDelete="cascade">
+      <reference local="user_id" foreign="id" />
+    </foreign-key>
+    <unique name="setting_key_idx">
+      <unique-column name="user_id" />
+      <unique-column name="key" />
+    </unique>
+  </table>
+</database>

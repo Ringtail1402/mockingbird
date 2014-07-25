@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="default" namespace="AnthemCM\Feedback\Model" package="AnthemCM.Feedback.Model" defaultIdMethod="native">
+  <table name="feedbacks" phpName="Feedback" package="AnthemCM.Feedback.Model">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="user_id" type="integer" />
+    <column name="email" type="varchar" size="255" />
+    <column name="content" type="longvarchar" />
+    <behavior name="timestampable" />
+    <foreign-key foreignTable="users" onDelete="cascade">
+      <reference local="user_id" foreign="id"/>
+    </foreign-key>
+  </table>
+</database>

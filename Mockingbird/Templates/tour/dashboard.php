@@ -1,0 +1,1 @@
+<ul><?php echo _t('TOUR_DASHBOARD_1') ?></ul>

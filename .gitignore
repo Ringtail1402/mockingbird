@@ -1,0 +1,11 @@
+.idea
+composer.lock
+localconfig.inc
+*/Thumbs.db
+*/.DS_Store
+/bin
+/vendor
+/console*.php
+/index*.php
+SQL/sqldb.map
+SQL/*.schema.sql

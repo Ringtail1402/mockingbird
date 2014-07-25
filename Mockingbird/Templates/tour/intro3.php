@@ -1,0 +1,1 @@
+<?php echo _t('TOUR_INTRO3_1')  // Not a terribly complicated template ?>

@@ -1,0 +1,24 @@
+{
+    "name": "enotogorsk/mockingbird",
+    "description": "Simple personal finance management web app, based on its own Anthem PHP mini-framework",
+    "type": "project",
+    "homepage": "https://github.com/Ringtail1402/mockingbird",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexander Ulyanov",
+            "email": "procyona@gmail.com",
+            "homepage": "http://www.enotogorsk.ru/"
+        }
+    ],
+    "require": {
+        "php": "~5.3"
+    },
+    "require-dev": {
+        "propel/propel1": "~1.6"
+    },
+    "config": {
+        "bin-dir": "bin",
+        "vendor-dir": "vendor"
+    }
+}

@@ -1,0 +1,37 @@
+/* Anthem global modifications to Bootstrap CSS */
+
+html, body, .wrap { height: 100%; }
+body { min-width: 1000px; }
+.wrap { height: auto !important; min-height: 100%; position: relative; z-index: 0; margin: 0; }
+.footer.container-fluid { clear: both; height: 70px; margin: -72px auto 0; position: relative; z-index: 1; }
+.navbar-inner { border-radius: 0; }
+.nav .hash-icon a { padding-left: 0px !important; }
+.nav a i { opacity: 0.5; vertical-align: text-bottom; }
+.nav .active a i { opacity: 1; }
+.navbar .brand { white-space: nowrap; margin-right: 5px; }
+.navbar .brand.subtitled img { margin-top: -2px; float: left; }
+.navbar .brand { line-height: 36px; padding: 0; }
+.navbar .brand.subtitled { line-height: 16px; margin-top: 5px; }
+.navbar .brand.subtitled span { color: #aaa; font-size: 12px; line-height: 10px; }
+.navbar { margin-bottom: 10px; }
+.page-header { margin-top: -10px; margin-bottom: 5px; padding-bottom: 0; }
+#login-link span { cursor: pointer; border-bottom: 1px dotted; }
+#login-form { position: absolute; right: 0; top: 42px; padding-bottom: 1px; z-index: 10; }
+#login-form .control-group { margin-bottom: 8px; }
+#login-form .control-label { width: 80px; }
+#login-form .controls { margin-left: 90px; }
+#login-spinner { margin-left: 5px; margin-bottom: -4px; }
+.dropdown-toggle { cursor: pointer; }
+.spinner-img { background: url(../../../images/Anthem/Core/spinner-white.gif) no-repeat center; width: 32px; height: 32px; padding: 4px; margin: 0 auto; }
+.navbar-inverse .spinner-img { background-image: url(../../../images/Anthem/Core/spinner-black.gif); }
+#disable-layer { position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: 9999; opacity: 0.1; background-color: #000; }
+.error-page { text-align: center; }
+.error-page h1 { font-size: 200px; line-height: 300px; }
+.mini-form { margin-top: 75px; margin-left: auto; margin-right: auto; width: 50%; }
+.small-form { margin-top: 30px; padding: 30px; margin-left: auto; margin-right: auto; width: 66%; }
+.social-login { font-size: 13px !important; margin: 15px 0 5px 0; }
+.social-login.mini { margin: 0; display: inline-block; }
+.social-login ul { margin: -5px 0 0 0; }
+.social-login li { display: inline-block; margin: 0 20px 0 0; line-height: 16px; }
+.social-login.mini li { line-height: normal; }
+.social-login li img { vertical-align: top; }

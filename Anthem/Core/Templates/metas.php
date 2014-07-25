@@ -1,0 +1,1 @@
+<meta name="title" content="<?php echo htmlspecialchars($view->sub('Anthem/Core:title.php')) ?>">

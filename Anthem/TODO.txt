@@ -1,0 +1,15 @@
+* Looser coupling for Anthem services.  Do not pass around entire
+  Application object whenever possible.  Use event mechanism.
+* Streamline configuration (but keep it based on plain PHP)
+* Cache component for caching of configuration and arbitrary stuff
+* Add support for minification and versioning to AssetHelpers
+* Other features:
+  - Unit tests, at least for service classes
+  - Bring back in-line editing
+  - Better README
+  - Split L10n module from core.
+  - CalendarAdminPage (Table + selection by calendar)
+  - PropelTreeAdminPage (Table + tree view)
+  - Files (File library, with inputs w/ajax upload, easy binding to models,
+    virtual directory structure, TinyMCE integration)
+  - Search (using something like Sphinx or Lucene)

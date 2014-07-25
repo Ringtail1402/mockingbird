@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="default" namespace="Anthem\Notify\Model" package="Anthem.Notify.Model" defaultIdMethod="native">
+  <table name="notifications" phpName="Notification" package="Anthem.Notify.Model">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="uniqid" type="varchar" size="40" required="true" primaryString="true" />
+    <column name="message" type="longvarchar" required="true" />
+    <column name="output_class" type="varchar" size="40" />
+    <column name="no_dismiss" type="boolean" required="true" default="false" />
+    <column name="user_id" type="integer" />
+    <column name="policies" type="varchar" size="255" />
+    <behavior name="timestampable" />
+    <foreign-key foreignTable="users" phpName="User" refPhpName="Notification" onDelete="cascade">
+      <reference local="user_id" foreign="id" />
+    </foreign-key>
+    <unique name="uniqid_idx">
+      <unique-column name="user_id" />
+      <unique-column name="uniqid" />
+    </unique>
+  </table>
+</database>

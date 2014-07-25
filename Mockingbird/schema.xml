@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="default" namespace="Mockingbird\Model" package="Mockingbird.Model" defaultIdMethod="native">
+  <table name="accounts" phpName="Account" package="Mockingbird.Model">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="user_id" type="integer" required="true" />
+    <column name="title" type="varchar" size="255" required="true" primaryString="true" />
+    <column name="currency_id" type="integer" required="true" />
+    <column name="initial_amount" type="decimal" size="10" scale="2" required="true" default="0" />
+    <column name="isclosed" type="boolean" required="true" default="false" />
+    <column name="isdebt" type="boolean" required="true" default="false" />
+    <column name="iscredit" type="boolean" required="true" default="false" />
+    <column name="color" type="varchar" size="10" required="false" default="#000000" />
+    <behavior name="timestampable" />
+    <foreign-key foreignTable="users" phpName="User" refPhpName="Account" onDelete="cascade">
+      <reference local="user_id" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="currencies" phpName="Currency" refPhpName="Accounts" onDelete="cascade">
+      <reference local="currency_id" foreign="id" />
+    </foreign-key>
+  </table>
+
+  <table name="transactions" phpName="Transaction" package="Mockingbird.Model">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="user_id" type="integer" required="true" />
+    <column name="title" type="varchar" size="255" required="true" primaryString="true" />
+    <column name="category_id" type="integer" required="false" />
+    <column name="account_id" type="integer" required="true" />
+    <column name="target_account_id" type="integer" required="false" />
+    <column name="counter_transaction_id" type="integer" required="false" />
+    <column name="counter_party_id" type="integer" required="false" />
+    <column name="parent_transaction_id" type="integer" required="false" />
+    <column name="amount" type="decimal" size="10" scale="2" required="true" default="0" />
+    <column name="isprojected" type="boolean" required="true" default="false" />
+    <behavior name="timestampable" />
+    <foreign-key foreignTable="users" phpName="User" refPhpName="Transaction" onDelete="cascade">
+      <reference local="user_id" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="transaction_categories" phpName="Category" refPhpName="Transactions">
+      <reference local="category_id" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="accounts" phpName="Account" refPhpName="Transactions" onDelete="cascade">
+      <reference local="account_id" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="accounts" phpName="TargetAccount" refPhpName="TargetTransactions">
+      <reference local="target_account_id" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="transactions" phpName="CounterTransaction" refPhpName="BackCounterTransactions" onDelete="cascade">
+      <reference local="counter_transaction_id" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="counter_parties" phpName="CounterParty" refPhpName="Transactions" onDelete="cascade">
+      <reference local="counter_party_id" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="transactions" phpName="ParentTransaction" refPhpName="SubTransactions" onDelete="cascade">
+      <reference local="parent_transaction_id" foreign="id" />
+    </foreign-key>
+    <index name="transaction_title_idx">
+      <index-column name="title" />
+    </index>
+    <index name="transaction_category_id_idx">
+      <index-column name="category_id" />
+    </index>
+    <index name="transaction_amount_idx">
+      <index-column name="amount" />
+    </index>
+    <index name="transaction_isprojected_idx">
+      <index-column name="isprojected" />
+    </index>
+    <index name="transaction_account_id_idx">
+      <index-column name="account_id" />
+    </index>
+    <index name="transaction_target_account_id_idx">
+      <index-column name="target_account_id" />
+    </index>
+    <index name="transaction_counter_transaction_id_idx">
+      <index-column name="counter_transaction_id" />
+    </index>
+    <index name="transaction_counter_party_id_idx">
+      <index-column name="counter_party_id" />
+    </index>
+    <index name="transaction_parent_transaction_id_idx">
+      <index-column name="parent_transaction_id" />
+    </index>
+  </table>
+
+  <table name="transaction_categories" phpName="TransactionCategory" package="Mockingbird.Model">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="user_id" type="integer" required="true" />
+    <column name="title" type="varchar" size="255" required="true" primaryString="true" />
+    <column name="color" type="varchar" size="10" required="false" default="#000000" />
+    <foreign-key foreignTable="users" phpName="User" refPhpName="Category" onDelete="cascade">
+      <reference local="user_id" foreign="id" />
+    </foreign-key>
+    <unique name="transaction_category_title_idx">
+      <unique-column name="user_id" />
+      <unique-column name="title" />
+    </unique>
+  </table>
+
+  <table name="transaction_tags" phpName="TransactionTag" package="Mockingbird.Model">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="user_id" type="integer" required="true" />
+    <column name="title" type="varchar" size="255" required="true" primaryString="true" />
+    <foreign-key foreignTable="users" phpName="User" refPhpName="Tag" onDelete="cascade">
+      <reference local="user_id" foreign="id" />
+    </foreign-key>
+    <unique name="transaction_tag_title_idx">
+      <unique-column name="user_id" />
+      <unique-column name="title" />
+    </unique>
+  </table>
+
+  <table name="ref_transactions_tags" phpName="RefTransactionTag" package="Mockingbird.Model" isCrossRef="true">
+    <column name="transaction_id" type="integer" required="true" primaryKey="true" />
+    <column name="tag_id" type="integer" required="true" primaryKey="true" />
+    <foreign-key foreignTable="transactions" onDelete="cascade">
+      <reference local="transaction_id" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="transaction_tags" onDelete="cascade">
+      <reference local="tag_id" foreign="id" />
+    </foreign-key>
+    <index name="ref_transaction_tag_transaction_id_idx">
+      <index-column name="transaction_id" />
+    </index>
+    <index name="ref_transaction_tag_tag_id_idx">
+      <index-column name="tag_id" />
+    </index>
+  </table>
+
+  <table name="counter_parties" phpName="CounterParty" package="Mockingbird.Model">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="user_id" type="integer" required="true" />
+    <column name="title" type="varchar" size="255" required="true" primaryString="true" />
+    <foreign-key foreignTable="users" phpName="User" refPhpName="CounterParty" onDelete="cascade">
+      <reference local="user_id" foreign="id" />
+    </foreign-key>
+    <unique name="counter_party_title_idx">
+      <unique-column name="user_id" />
+      <unique-column name="title" />
+    </unique>
+  </table>
+
+  <table name="budgets" phpName="Budget" package="Mockingbird.Model">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="user_id" type="integer" required="true" />
+    <column name="year" type="integer" required="true" />
+    <column name="month" type="integer" required="false" />
+    <column name="currency_id" type="integer" required="false" />
+    <foreign-key foreignTable="users" phpName="User" refPhpName="Budget" onDelete="cascade">
+      <reference local="user_id" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="currencies" phpName="Currency" refPhpName="Budget" onDelete="setnull">
+      <reference local="currency_id" foreign="id" />
+    </foreign-key>
+  </table>
+
+  <table name="budget_entries" phpName="BudgetEntry" package="Mockingbird.Model">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="budget_id" type="integer" required="true" />
+    <column name="category_id" type="integer" required="true" />
+    <column name="amount" type="decimal" size="10" scale="2" required="true" default="0" />
+    <column name="when_entry" phpName="When" type="integer" required="false" />
+    <column name="description" type="longvarchar" required="false" />
+    <foreign-key foreignTable="budgets" phpName="Budget" refPhpName="Entry" onDelete="cascade">
+      <reference local="budget_id" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="transaction_categories" phpName="Category" refPhpName="BudgetEntry" onDelete="cascade">
+      <reference local="category_id" foreign="id" />
+    </foreign-key>
+    <index name="budget_entry_budget_id_idx">
+      <index-column name="budget_id" />
+    </index>
+    <index name="budget_entry_category_id_idx">
+      <index-column name="category_id" />
+    </index>
+  </table>
+
+  <table name="currencies" phpName="Currency" package="Mockingbird.Model">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="title" type="varchar" size="10" required="true" primaryString="true" />
+    <column name="format" type="varchar" size="20" required="true" />
+    <column name="is_primary" type="boolean" required="true" default="false" />
+    <column name="rate_to_primary" type="float" required="true" default="1.0" />
+  </table>
+</database>

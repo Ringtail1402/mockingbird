@@ -1,0 +1,46 @@
+<?php
+
+// User-changeable configuration values.
+
+$localconfig = array(
+  'modules' => array(
+    'Anthem/Core',
+    'Anthem/Cron',
+    'Anthem/Propel',
+    'Anthem/Forms',
+    'Anthem/Admin',
+    'Anthem/Auth',
+    'Anthem/Settings',
+    'Anthem/Notify',
+    'Anthem/Nav',
+    'AnthemCM/Pages',
+    'AnthemCM/Tour',
+    'AnthemCM/UserProfile',
+    'AnthemCM/Feedback',
+    'Mockingbird',
+  ),
+
+  'web_root'    => '/mockingbird',
+
+  'log'         => '/var/log/mockingbird.log',
+
+  'db_driver'   => 'mysql',
+  'db_dsn'      => 'mysql:host=localhost;dbname=mockingbird',
+  'db_username' => 'root',
+  'db_password' => '',
+
+  // By default SMTP to localhost is used
+  /*
+  'mailconfig' => array(
+    'host' => 'smtp.gmail.com',
+    'port' => 465,
+    'username' => 'example@gmail.com',
+    'password' => 'example',
+    'encryption' => 'ssl',
+  ),
+  */
+  'mailfrom'    => 'example@domain.com',
+  'feedbackto'  => 'example@domain.com',
+
+  'oxr_appid'   => '',  // openexchangerates.org AppID should go here.
+);

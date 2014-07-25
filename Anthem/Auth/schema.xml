@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="default" namespace="Anthem\Auth\Model" package="Anthem.Auth.Model" defaultIdMethod="native">
+
+  <table name="users" phpName="User" package="Anthem.Auth.Model">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="email" type="varchar" size="160" required="true" primaryString="true" />
+    <column name="algorithm" type="varchar" size="16" />
+    <column name="salt" type="varchar" size="160" />
+    <column name="password" type="varchar" size="160" />
+    <column name="locked" type="varchar" size="255" />
+    <column name="is_superuser" type="boolean" default="false" required="true" />
+    <column name="last_login" type="timestamp" />
+    <behavior name="timestampable" />
+    <unique name="auth_user_email_idx">
+      <unique-column name="email" />
+    </unique>
+  </table>
+
+  <table name="user_keys" phpName="UserKey" package="Anthem.Auth.Model">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="user_id" type="integer" required="true" />
+    <column name="type" type="varchar" size="40" required="true" />
+    <column name="uniqid" type="varchar" size="80" required="true" primaryString="true" />
+    <column name="data" type="longvarchar" />
+    <behavior name="timestampable" />
+    <foreign-key foreignTable="users" phpName="User" refPhpName="Key" onDelete="cascade">
+      <reference local="user_id" foreign="id" />
+    </foreign-key>
+    <unique name="auth_user_keys_idx">
+      <unique-column name="uniqid" />
+    </unique>
+  </table>
+
+  <table name="user_social_accounts" phpName="UserSocialAccount" package="Anthem.Auth.Model">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="user_id" type="integer" required="true" />
+    <column name="provider" type="varchar" size="40" required="true" />
+    <column name="remote_user_id" type="varchar" size="255" required="true" />
+    <column name="title" type="varchar" size="255" />
+    <foreign-key foreignTable="users" phpName="User" refPhpName="SocialAccount" onDelete="cascade">
+      <reference local="user_id" foreign="id" />
+    </foreign-key>
+    <unique name="auth_user_social_accounts_idx">
+      <unique-column name="provider" />
+      <unique-column name="remote_user_id" />
+    </unique>
+  </table>
+
+  <table name="groups" phpName="Group" package="Anthem.Auth.Model">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="title" type="varchar" size="255" required="true" primaryString="true" />
+    <unique name="auth_group_title_idx">
+      <unique-column name="title" />
+    </unique>
+  </table>
+
+  <table name="user_policies" phpName="UserPolicy" package="Anthem.Auth.Model">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="user_id" type="integer" required="true" />
+    <column name="policy" type="varchar" size="160" required="true" primaryString="true" />
+    <column name="enable" type="boolean" default="true" required="true" />
+    <foreign-key foreignTable="users" phpName="User" refPhpName="Policy" onDelete="cascade">
+      <reference local="user_id" foreign="id" />
+    </foreign-key>
+  </table>
+
+  <table name="group_policies" phpName="GroupPolicy" package="Anthem.Auth.Model">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="group_id" type="integer" required="true" />
+    <column name="policy" type="varchar" size="160" required="true" primaryString="true" />
+    <foreign-key foreignTable="groups" phpName="Group" refPhpName="Policy" onDelete="cascade">
+      <reference local="group_id" foreign="id" />
+    </foreign-key>
+  </table>
+
+  <table name="ref_users_groups" phpName="RefUserGroup" package="Anthem.Auth.Model" isCrossRef="true">
+    <column name="user_id" type="integer" required="true" primaryKey="true" />
+    <column name="group_id" type="integer" required="true" primaryKey="true" />
+    <foreign-key foreignTable="users" phpName="User" refPhpName="RefGroup" onDelete="cascade">
+      <reference local="user_id" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="groups" phpName="Group" refPhpName="RefGroup" onDelete="cascade">
+      <reference local="group_id" foreign="id" />
+    </foreign-key>
+    <index name="ref_user_group_user_id_idx">
+      <index-column name="user_id" />
+    </index>
+    <index name="ref_user_group_group_id_idx">
+      <index-column name="group_id" />
+    </index>
+  </table>
+</database>

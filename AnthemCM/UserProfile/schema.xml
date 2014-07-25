@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="default" namespace="AnthemCM\UserProfile\Model" package="AnthemCM.UserProfile.Model" defaultIdMethod="native">
+  <table name="user_profiles" phpName="UserProfile" package="AnthemCM.UserProfile.Model">
+    <column name="id" type="integer" required="true" primaryKey="true" />
+    <column name="firstname" type="varchar" size="255" required="false" />
+    <column name="lastname" type="varchar" size="255" required="false" />
+    <column name="nickname" type="varchar" size="255" required="false" />
+    <column name="avatar" type="varchar" size="255" required="false" />
+    <foreign-key foreignTable="users" onDelete="cascade">
+      <reference local="id" foreign="id"/>
+    </foreign-key>
+  </table>
+</database>

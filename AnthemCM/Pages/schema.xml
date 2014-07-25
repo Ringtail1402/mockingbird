@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="default" namespace="AnthemCM\Pages\Model" package="AnthemCM.Pages.Model" defaultIdMethod="native">
+  <table name="pages" phpName="Page" package="AnthemCM.Pages.Model">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="title" type="varchar" size="255" required="true" primaryString="true" />
+    <column name="url" type="varchar" size="255" required="true" />
+    <column name="content" type="longvarchar" />
+    <column name="is_active" type="boolean" required="true" />
+    <behavior name="sluggable">
+      <parameter name="slug_column" value="url" />
+    </behavior>
+    <behavior name="timestampable" />
+  </table>
+</database>

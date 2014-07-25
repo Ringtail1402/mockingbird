@@ -1,0 +1,1 @@
+<div class="pull-right muted"><?php echo _t('TRANSACTION_PERIOD') ?> <i class="icon-arrow-right"></i></div>

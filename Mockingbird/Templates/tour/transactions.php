@@ -1,0 +1,1 @@
+<?php echo _t('TOUR_TRANSACTIONS_1') ?>

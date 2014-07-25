@@ -1,0 +1,8 @@
+* Backups
+* CSRF tokens
+* Look into glitchy typeahead
+
+Bugs:
+
+* Creating a transaction with a subtransaction where both
+  have (same) new categories and tags results in a SQL error
