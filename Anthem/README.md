@@ -43,17 +43,17 @@ Installation
 
 Anthem application will generally have the following structure:
 
-  /
-  +- Anthem/
-  |  +- Core/
-  |  +- Forms/
-  |  +- ...
-  +- Module1/
-  +- Module2/
-  +- ...
-  +- SQL/
-  +- App.php (optional)
-  +- localconfig.inc
+    /
+    +- Anthem/
+    |  +- Core/
+    |  +- Forms/
+    |  +- ...
+    +- Module1/
+    +- Module2/
+    +- ...
+    +- SQL/
+    +- App.php (optional)
+    +- localconfig.inc
 
 Anthem directory holds default Anthem modules.  Other modules may be
 installed separately.
@@ -74,7 +74,7 @@ The entire app directory should not be directly accessible from the Web.
 Use `bootstrap.php` script to create app entry points and symlinks to static
 resources in web server directory:
 
-  $ php /path/to/app/Anthem/bootstrap.php /var/www/myapp
+    $ php /path/to/app/Anthem/bootstrap.php /var/www/myapp
 
 This will create four entry points (front controllers): `index.php`,
 `index.debug.php`, `console.php` and `console.debug.php`.  On production systems,

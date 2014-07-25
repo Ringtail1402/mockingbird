@@ -46,7 +46,7 @@ Installation
 * Copy this codebase somewhere outside web server document root
 * Use `Anthem/bootstrap.php` script to install Mockingbird into web dir:
 
-  $ php ./Anthem/bootstrap.php /path/to/web/dir
+        $ php ./Anthem/bootstrap .php /path/to/web/dir
 
 * This will symlink static assets into web dir, and create four short front
   controller files and `.htaccess` for Apache.  If you are not using Apache,
@@ -57,18 +57,18 @@ Installation
 * Create database tables by loading `SQL/schema.sql` dump
 * Create root user and base currency by executing:
 
-  $ php /path/to/web/dir/console.php propel:load-fixtures Anthem/Auth Mockingbird
+        $ php /path/to/web/dir/console.php propel:load-fixtures Anthem/Auth Mockingbird
 
 * Optionally, create demo account by loading `demo.sql` dump
 * That's all!
 
 If your server does not support https, you may want to change `config.inc` line:
 
-  $config['Auth']['https'] = 'auth';
+    $config['Auth']['https'] = 'auth';
 
 to:
 
-  $config['Auth']['https'] = 'never';
+    $config['Auth']['https'] = 'never';
 
 Note that you do NOT need to do a `composer install`.  Composer defines
 a dependency on Propel, but it is only needed to re-generate base ORM
